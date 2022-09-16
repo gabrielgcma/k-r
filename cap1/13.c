@@ -34,6 +34,10 @@ int main()
 
     for (int i=0; i<SIZE; i++)
     {
-        printf("\nSize of word %d: %d", i+1, histo[i]);
+        //printf("\nSize of word %d: %d", i+1, histo[i]);
+        printf("\nSize of word %d: ", i+1);
+        for (int j=0; j<histo[i]; j++)
+            printf("█");
+        printf("\n");
     }
 }
