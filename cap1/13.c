@@ -1,36 +1,39 @@
 #include <stdio.h>
 
-#define DENTRO 1
-#define FORA   0
+#define IN  1
+#define OUT    0
+#define SIZE 5
 
 int main()
 {
-    int histogram[5], c, estado, nw; // nw = num of words 
+    int histo[SIZE], c, state = OUT, wcount = 0;
 
-    estado = FORA;
-    nw = 0;
-
-    printf("Enter a 5 word phrase: \n");
+    for (int i=0; i<SIZE; i++)
+    {
+        histo[i] = 0;
+    }
+    
+    printf("Enter a %d word phrase: \n", SIZE);
     
     while ((c = getchar()) != EOF)
     {
-        if (c == ' ' || c == '\t')
-            estado = FORA;
-        else if (estado == FORA)
+        if (c == ' ' || c == '\t' || c == '\n')
         {
-            estado = DENTRO;
-            nw++;
+            if (state == IN)
+            {
+                wcount++;
+                state = OUT;
+            }
         }
-        else
+        else if (state == OUT || state == IN) // if it's not whitespace and we're in or outside a word
         {
-            histogram[nw]++;
+            state = IN;
+            histo[wcount]++;
         }
     }
 
-    for (int i=0; i<5; i++)
+    for (int i=0; i<SIZE; i++)
     {
-        printf("\nWord %d: ", i);
-        for (int j=0; j<histogram[i]; j++)
-            printf("%c", 187);
+        printf("\nSize of word %d: %d", i+1, histo[i]);
     }
 }
